@@ -9,9 +9,10 @@ import com.klepra.polls.entity.Option;
 import com.klepra.polls.entity.Poll;
 import com.klepra.polls.repository.OptionRepository;
 import com.klepra.polls.repository.PollRepository;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,8 @@ public class DummyDataCmdLineRunner implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         Poll poll = new Poll("What do you preffer to code backend in?");
         poll.setVisible(Boolean.TRUE);
-        poll.setEndDate(new Date());
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        poll.setEndDate(Date.from(tomorrow.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         poll.setIpAdresses(Arrays.asList("192.1.2.164"));
         pollRepository.save(poll);
 
@@ -43,8 +45,6 @@ public class DummyDataCmdLineRunner implements CommandLineRunner {
         option2.setPoll(poll);
         optionRepository.save(option1);
         optionRepository.save(option2);
-
-//        pollRepository.deleteById(poll.getId());
 
         Poll poll2 = new Poll("What do frontend framework do you preffer?");
         poll2.setVisible(Boolean.TRUE);

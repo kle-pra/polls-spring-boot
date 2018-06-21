@@ -1,29 +1,43 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.klepra.polls.entity;
 
-import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
  * @author klemen
  */
 @Entity
-public class User implements Serializable {
+public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     private String username;
     private String password;
+    private boolean disabled;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.disabled = false;
+    }
+
+    public User() {
+    }
+
+    @ManyToMany
+//    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -33,6 +47,44 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        Set<GrantedAuthority> authorities = new HashSet<>();
+
+        for (Role r : roles) {
+            authorities.add(new GrantedAuthority() {
+                @Override
+                public String getAuthority() {
+                    return r.getRole();
+                }
+
+                @Override
+                public String toString() {
+                    return r.getRole();
+                }
+
+            });
+
+        }
+
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public String getUsername() {
         return username;
     }
@@ -41,14 +93,34 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
     
     
-    
+
 }

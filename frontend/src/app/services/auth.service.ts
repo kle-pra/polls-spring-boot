@@ -14,11 +14,11 @@ export class AuthService {
   loginSubject = new BehaviorSubject<any>(null);
 
   login(username, password) {
-    return this.http.post('api/login', { username: username, password: password });
+    return this.http.post('api/auth/login', { username: username, password: password });
   }
 
   register(username, password) {
-    return this.http.post('api/register', { username: username, password: password });
+    return this.http.post('api/auth/register', { username: username, password: password });
   }
 
   storeToken(data): Observable<void> {
@@ -33,7 +33,7 @@ export class AuthService {
   getLoggedInUser(): string {
 
     if (this.isLoggedIn()) {
-      return this.jwtHelper.decodeToken(localStorage.getItem('jwt')).data.username;
+      return this.jwtHelper.decodeToken(localStorage.getItem('jwt')).sub;
     }
     return null;
   }

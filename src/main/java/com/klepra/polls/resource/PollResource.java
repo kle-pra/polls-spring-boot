@@ -10,6 +10,7 @@ import com.klepra.polls.services.PollService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,8 +63,8 @@ public class PollResource {
     }
     
     @PostMapping("{id}/vote/{optionId}")
-    public ResponseEntity<?> post(@PathVariable Long id, @PathVariable Long optionId) throws Exception {
-        pollService.vote(id, optionId);
+    public ResponseEntity<?> post(@PathVariable Long id, @PathVariable Long optionId, HttpServletRequest request) throws Exception {
+        pollService.vote(id, optionId, request.getRemoteAddr());
         return ResponseEntity.ok().build();
     }
 }
