@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author klemen
  */
 @RestController
-@RequestMapping("/url")
+@RequestMapping("/api/auth")
 public class AuthResource {
     
 }

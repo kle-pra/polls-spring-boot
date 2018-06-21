@@ -5,12 +5,15 @@
  */
 package com.klepra.polls.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,13 +25,15 @@ import javax.persistence.Temporal;
  * @author klemen
  */
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Poll implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "poll")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "poll")
     private List<Option> options;
     
     private String title;
@@ -37,6 +42,7 @@ public class Poll implements Serializable {
     private Date endDate;
     
     @ElementCollection
+    @JsonIgnore
     private List<String> ipAdresses;
     
     private  Boolean visible;

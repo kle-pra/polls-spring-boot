@@ -1,0 +1,56 @@
+<ul class="sidenav" id="mobile-demo">
+  <li>
+    <a href="sass.html">Sass</a>
+  </li>
+  <li>
+    <a href="badges.html">Components</a>
+  </li>
+  <li>
+    <a href="collapsible.html">Javascript</a>
+  </li>
+  <li>
+    <a href="mobile.html">Mobile</a>
+  </li>
+</ul>
+<nav class="indigo darken-1" role="navigation">
+  <div class="nav-wrapper container">
+    <a id="logo-container" routerLink="/" class="brand-logo">Polls</a>
+    <a href="" data-target="nav-mobile" class="sidenav-trigger">
+      <i class="material-icons">menu</i>
+    </a>
+    <ul class="right hide-on-med-and-down">
+      <li>
+        <a *ngIf="isLoggedIn" routerLink="/my-polls">My polls</a>
+      </li>
+      <li>
+        <a *ngIf="isLoggedIn" routerLink="/add-poll">Add poll</a>
+      </li>
+      <li>
+        <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+      </li>
+      <li>
+        <a *ngIf="isLoggedIn" (click)="logout()">Logout ({{username}})</a>
+      </li>
+      <li>
+        <a *ngIf="!isLoggedIn" routerLink="/register">Register</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<ul id="nav-mobile" class="sidenav">
+  <li>
+    <a *ngIf="isLoggedIn" routerLink="/my-polls">My polls</a>
+  </li>
+  <li>
+    <a *ngIf="isLoggedIn" routerLink="/add-poll">Add poll</a>
+  </li>
+  <li>
+    <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+  </li>
+  <li>
+    <a *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+  </li>
+  <li>
+    <a *ngIf="!isLoggedIn" routerLink="/register">Register</a>
+  </li>
+</ul>

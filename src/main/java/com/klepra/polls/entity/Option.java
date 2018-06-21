@@ -25,13 +25,15 @@ public class Option implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String value;
+    private String option;
+    
+    private Long score = 0L;
 
     public Option() {
     }
 
     public Option(String value) {
-        this.value = value;
+        this.option = value;
     }
     
     @ManyToOne
@@ -53,15 +55,22 @@ public class Option implements Serializable {
     public void setPoll(Poll poll) {
         this.poll = poll;
     }
-    
-    
 
-    public String getValue() {
-        return value;
+    public Long getScore() {
+        return score;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setScore(Long score) {
+        this.score = score;
+    }
+     
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String value) {
+        this.option = value;
     }
     
     

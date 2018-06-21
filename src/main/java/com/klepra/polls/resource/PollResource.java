@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.PutMapping;
  * @author klemen
  */
 @RestController
-@RequestMapping("/polls")
+@RequestMapping("/api/polls")
 public class PollResource {
     
     @Autowired
@@ -59,5 +59,11 @@ public class PollResource {
         pollService.deletePollById(id);
         return ResponseEntity.status(204).build();
 
+    }
+    
+    @PostMapping("{id}/vote/{optionId}")
+    public ResponseEntity<?> post(@PathVariable Long id, @PathVariable Long optionId) throws Exception {
+        pollService.vote(id, optionId);
+        return ResponseEntity.ok().build();
     }
 }

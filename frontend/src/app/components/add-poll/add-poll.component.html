@@ -1,0 +1,42 @@
+<div class="row">
+  <form (ngSubmit)="onSubmitPollForm(f)" #f="ngForm" novalidate class="col s12">
+    <div class="row">
+      <div class="input-field col s6">
+        <input [(ngModel)]="poll.title" id="title" name="title" type="text" class="validate" required>
+        <label for="title">Your question/title goes here</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s4">
+        <input id="option" #option name="option" type="text" class="validate" (keyup.enter)="addOption(option.value);option.value='';">
+        <label for="option">Add an option</label>
+      </div>
+      <div class="input-field col s2">
+        <a class="btn-floating btn waves-effect waves-light indigo darken-1" (click)="addOption(option.value);option.value='';">
+          <i class="material-icons">add</i>
+        </a>
+      </div>
+    </div>
+    <div *ngFor="let o of options" class="row">
+      <div class="input-field col s4">
+        {{o}}
+      </div>
+      <div class="input-field col s2">
+        <a class="btn-floating btn waves-effect waves-light red darken-3" (click)="removeOption(o)">
+          <i class="material-icons">remove</i>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s4">
+        <input [(ngModel)]="poll.endDate" name="endDate" type="date" class="datepicker" required>
+        <label for="endDate">Ending date</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s4">
+        <button [disabled]="f.invalid || options.length==0" class="btn waves-effect waves-light cyan accent-4" type="submit" name="action">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

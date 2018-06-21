@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="input-field col s8 offset-s2">
+    <div class="poll-container">
+      <br>
+      <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="options" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
+        [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="row">
+  <form (ngSubmit)="login(f)" #f="ngForm" novalidate class="col s12">
+    <div class="row">
+      <div class="input-field col s6">
+        <input [(ngModel)]="username" id="username" name="username" type="text" #un="ngModel" [class.invalid]="un.errors?.required && un.touched"
+          required>
+        <label for="username">Username</label>
+        <div *ngIf="un.errors?.required && un.touched" class="red-text darken-1">
+          Username is required
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input [(ngModel)]="password" id="password" name="password" type="password" #p="ngModel" [class.invalid]="p.errors?.required && p.touched"
+          required>
+        <label for="password">Password</label>
+        <div *ngIf="p.errors?.required && p.touched" class="red-text darken-1">
+          Password is required
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s4">
+        <button [disabled]="f.invalid" class="btn waves-effect waves-light cyan accent-4" type="submit" name="action">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
