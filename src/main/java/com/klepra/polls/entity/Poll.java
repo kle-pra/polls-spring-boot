@@ -17,6 +17,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
@@ -53,6 +54,9 @@ public class Poll implements Serializable {
 
     public Poll() {
     }
+    
+    @ManyToOne
+    private User user;
 
     public Poll(String title) {
         this.title = title;
@@ -65,9 +69,14 @@ public class Poll implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
-    
-    
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     
     public void setId(Long id) {
         this.id = id;

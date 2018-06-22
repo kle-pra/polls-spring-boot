@@ -1,14 +1,17 @@
 package com.klepra.polls.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -43,12 +46,24 @@ public class User implements UserDetails {
         return id;
     }
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Poll> polls;
+
     public void setId(Long id) {
         this.id = id;
     }
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public List<Poll> getPolls() {
+        return polls;
+    }
+
+    public void setPolls(List<Poll> polls) {
+        this.polls = polls;
     }
 
     public void setRoles(List<Role> roles) {
@@ -120,5 +135,5 @@ public class User implements UserDetails {
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
     }
-       
+
 }

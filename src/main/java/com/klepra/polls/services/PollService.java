@@ -7,6 +7,7 @@ package com.klepra.polls.services;
 
 import com.klepra.polls.entity.Option;
 import com.klepra.polls.entity.Poll;
+import com.klepra.polls.entity.User;
 import com.klepra.polls.repository.OptionRepository;
 import com.klepra.polls.repository.PollRepository;
 import com.klepra.polls.repository.UserRepository;
@@ -37,8 +38,11 @@ public class PollService {
     }
 
     @Transactional
-    public Poll savePoll(Poll poll) {
+    public Poll savePoll(Poll poll, String username) {
+        
+        User user = userRepository.findOneByUsername(username);
 
+        poll.setUser(user);
         Poll savedPoll = pollRepository.save(poll);
         poll.getOptions().stream().forEach(option -> {
             option.setPoll(savedPoll);
@@ -98,6 +102,11 @@ public class PollService {
         } else {
             throw new Exception("Option id for poll not unique!");
         }
+    }
+
+    public List<Poll> getAllForUser(String username) {
+        User user = userRepository.findOneByUsername(username);
+        return pollRepository.findAllByUser(user);
     }
 
 }

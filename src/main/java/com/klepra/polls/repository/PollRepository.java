@@ -6,6 +6,8 @@
 package com.klepra.polls.repository;
 
 import com.klepra.polls.entity.Poll;
+import com.klepra.polls.entity.User;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author klemen
  */
 public interface PollRepository extends JpaRepository<Poll, Long> {
-    
+
+    List<Poll> findAllByUser(User user);
+
 }

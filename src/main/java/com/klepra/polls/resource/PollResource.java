@@ -7,6 +7,7 @@ package com.klepra.polls.resource;
 
 import com.klepra.polls.entity.Poll;
 import com.klepra.polls.services.PollService;
+import java.security.Principal;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
@@ -37,6 +38,11 @@ public class PollResource {
         return pollService.getAll();
     }
 
+    @GetMapping("/user")
+    public List<Poll> getUserPolls(Principal p) {
+        return pollService.getAllForUser(p.getName());
+    }
+
     @GetMapping("/{id}")
     public Poll get(@PathVariable String id) {
         return pollService.getPollById(Long.parseLong(id));
@@ -53,14 +59,14 @@ public class PollResource {
 
     @PostMapping
     @Secured("ROLE_USER")
-    public ResponseEntity<?> post(@RequestBody Poll poll) {
-        Poll savedPoll = pollService.savePoll(poll);
+    public ResponseEntity<?> post(@RequestBody Poll poll, Principal p) {
+        Poll savedPoll = pollService.savePoll(poll, p.getName());
         return ResponseEntity.status(201).body(savedPoll);
     }
 
     @Secured("ROLE_USER")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id, Principal p) {
         pollService.deletePollById(id);
         return ResponseEntity.status(204).build();
 
