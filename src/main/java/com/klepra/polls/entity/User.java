@@ -1,6 +1,8 @@
 package com.klepra.polls.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -26,8 +28,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
-    
-    @JsonIgnore
+
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
     private boolean disabled;
 
