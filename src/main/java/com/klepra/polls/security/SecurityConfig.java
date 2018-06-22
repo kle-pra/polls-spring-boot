@@ -36,6 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(4);
     }
+    
+    @Bean
+    public JwtAuthorizationTokenFilter getJwtFilter() {
+        return new JwtAuthorizationTokenFilter(userDetailsService(), jwtTokenUtils);
+    }
 
     @Bean
     @Override
@@ -48,6 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
+    @Autowired
+    JwtAuthorizationTokenFilter authenticationTokenFilter;
+    
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
@@ -78,7 +86,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated();
 
         // Custom JWT based security filter
-        JwtAuthorizationTokenFilter authenticationTokenFilter = new JwtAuthorizationTokenFilter(userDetailsService(), jwtTokenUtils);
         http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

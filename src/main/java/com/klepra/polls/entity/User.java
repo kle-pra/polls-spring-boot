@@ -29,6 +29,7 @@ public class User implements UserDetails {
     private Long id;
     private String username;
 
+    //password is only passed when deseralization is happening - input request
     @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
     private boolean disabled;

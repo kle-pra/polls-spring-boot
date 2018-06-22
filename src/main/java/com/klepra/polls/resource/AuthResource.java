@@ -5,7 +5,6 @@
  */
 package com.klepra.polls.resource;
 
-import com.klepra.polls.entity.Role;
 import com.klepra.polls.entity.User;
 import com.klepra.polls.services.UserService;
 import com.klepra.polls.utils.JwtTokenUtils;
