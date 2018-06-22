@@ -5,8 +5,11 @@
  */
 package com.klepra.polls.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -33,20 +36,20 @@ public class Poll implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "poll")
     private List<Option> options;
-    
+
     private String title;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate;
-    
+
     @ElementCollection
     @JsonIgnore
     private List<String> ipAdresses;
-    
-    private  Boolean visible;
+
+    private Boolean visible;
 
     public Long getId() {
         return id;
@@ -54,7 +57,10 @@ public class Poll implements Serializable {
 
     public Poll() {
     }
-    
+
+    //this annotation takes care of only returning user's id as json DTO
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     private User user;
 
@@ -77,7 +83,7 @@ public class Poll implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-    
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -113,7 +119,5 @@ public class Poll implements Serializable {
     public void setVisible(Boolean visible) {
         this.visible = visible;
     }
-
-    
 
 }
