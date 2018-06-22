@@ -16,7 +16,7 @@ export class PollService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt') !== null ? localStorage.getItem('jwt') : ''
+        'Authorization': localStorage.getItem('jwt') !== null ? 'Bearer ' + localStorage.getItem('jwt') : ''
       })
     };
     return this.http.get('api/polls/user', httpOptions);
@@ -30,7 +30,7 @@ export class PollService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt') !== null ? localStorage.getItem('jwt') : ''
+        'Authorization': localStorage.getItem('jwt') !== null ? 'Bearer ' + localStorage.getItem('jwt') : ''
       })
     };
     return this.http.post('api/polls', poll, httpOptions);
@@ -40,7 +40,7 @@ export class PollService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt') !== null ? localStorage.getItem('jwt') : ''
+        'Authorization': localStorage.getItem('jwt') !== null ? 'Bearer ' + localStorage.getItem('jwt') : ''
       })
     };
     return this.http.delete('api/polls/' + pollId, httpOptions);

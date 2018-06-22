@@ -120,7 +120,5 @@ public class User implements UserDetails {
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
     }
-    
-    
-
+       
 }

@@ -32,7 +32,7 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        LOG.debug("processing authentication for '{}'", request.getRequestURL());
+        LOG.info("processing authentication for '{}'", request.getRequestURL());
         final String requestHeader = request.getHeader(this.tokenHeader);
         String username = null;
         String authToken = null;
@@ -46,10 +46,10 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
                 LOG.warn("the token is expired and not valid anymore", e);
             }
         } else {
-            LOG.debug("no token was included with: " + request.getRequestURL());
+            LOG.info("no token was included with: " + request.getRequestURL());
         }
 
-        LOG.debug("checking authentication for user '{}'", username);
+        LOG.info("checking authentication for user '{}'", username);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             // Get fresh user info from db, You could also store the information only in the token and read it from it.
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
@@ -58,7 +58,7 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
             if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                LOG.debug("authorizated user '{}', setting security context", username);
+                LOG.info("authorizated user '{}', setting security context", username);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
