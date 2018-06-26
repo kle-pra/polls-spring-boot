@@ -77,7 +77,7 @@ public class DummyDataCmdLineRunner implements CommandLineRunner {
         optionRepository.save(option1);
         optionRepository.save(option2);
 
-        Poll poll2 = new Poll("What do frontend framework do you preffer?");
+        Poll poll2 = new Poll("What frontend framework do you preffer?");
         poll2.setVisible(Boolean.TRUE);
         poll2.setEndDate(new Date());
         poll2.setIpAdresses(Arrays.asList("192.1.2.164"));

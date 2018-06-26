@@ -19,14 +19,11 @@ export class UsersComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-
-
-
   }
 
   deleteUser(id) {
     this.userService.deleteUser(id).subscribe(success => {
-      console.log(success);
+      this.users = this.users.filter(user => user.id != id);
     }, error => {
       console.log(error);
     });

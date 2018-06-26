@@ -43,6 +43,7 @@ public class PollResource {
     public List<Poll> getUserPolls(Principal p) {
         return pollService.getAllForUser(p.getName());
     }
+    
     @GetMapping("/{id}")
     public Poll get(@PathVariable String id) {
         return pollService.getPollById(Long.parseLong(id));

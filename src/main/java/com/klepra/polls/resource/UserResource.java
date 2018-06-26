@@ -10,6 +10,7 @@ import com.klepra.polls.services.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,11 +30,13 @@ public class UserResource {
     private UserService userService;
 
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public List<User> getAllUsers(@RequestParam(defaultValue = "false") Boolean includeAdmins) {
         return userService.getAllUsers(includeAdmins);
     }
 
     @DeleteMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.status(204).build();

@@ -9,6 +9,12 @@ export class PollService {
   constructor(private http: HttpClient) { }
 
   getPolls(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt') !== null ? 'Bearer ' + localStorage.getItem('jwt') : ''
+      })
+    };
     return this.http.get('api/polls');
   }
 
