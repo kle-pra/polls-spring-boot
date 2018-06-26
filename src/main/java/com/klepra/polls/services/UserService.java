@@ -63,8 +63,8 @@ public class UserService {
         }
     }
 
-    public List<User> deleteUserById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 
 }

@@ -4,12 +4,20 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Username</th>
+        <th scope="col">Roles</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users" class="col s12 m4 poll-coloumn">
         <th>{{user.id}}</th>
         <td>{{user.username}}</td>
+        <td>
+          <span *ngFor="let role of user.roles">{{role.role}} *</span>
+        </td>
+        <td>
+          <button type="button" class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>

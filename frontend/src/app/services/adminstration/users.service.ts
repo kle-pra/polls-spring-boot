@@ -11,4 +11,8 @@ export class UsersService {
   getUsers() {
     return this.http.get('api/user');
   }
+
+  deleteUser(id: number): any {
+    return this.http.delete('api/user/' + id);
+  }
 }
