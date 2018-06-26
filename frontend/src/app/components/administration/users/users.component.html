@@ -1,3 +1,16 @@
-<div>
-  <ngx-datatable [rows]="rows" [columns]="columns"></ngx-datatable>
+<div class="section">
+  <table class="table table-sm table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" class="col s12 m4 poll-coloumn">
+        <th>{{user.id}}</th>
+        <td>{{user.username}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

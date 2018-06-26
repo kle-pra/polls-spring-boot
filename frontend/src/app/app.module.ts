@@ -23,6 +23,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { UsersComponent } from './components/administration/users/users.component';
 import { AdminGuard } from './guards/admin.guard';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { PollsComponent } from './components/administration/polls/polls.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     PollSmallComponent,
     MyPollsComponent,
     UsersComponent,
+    PollsComponent,
 
   ],
   imports: [

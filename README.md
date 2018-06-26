@@ -1,6 +1,8 @@
-Spring Boot implementation of polling application I already made with NodeJS here:
+Spring Boot implementation of polling application:
 
-https://github.com/kle-pra/polls-node
+Demo:
+
+https://polls-spring-boot.herokuapp.com/
 
 App enables registration/login. As a logged-in user you can create, list and delete your own polls. Anonymous users can vote and see results of polls. You can see results in a simple chart (can be improved).
 

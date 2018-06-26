@@ -10,11 +10,12 @@ export class UsersComponent implements OnInit {
 
   constructor(private userService: UsersService) { }
 
+  users = [];
 
   ngOnInit() {
     this.userService.getUsers().subscribe((users: any) => {
       console.log(users);
-      // this.rows = users;
+      this.users = users;
     }, error => {
       console.log(error);
     });

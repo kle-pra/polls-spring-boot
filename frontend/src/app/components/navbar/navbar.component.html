@@ -20,10 +20,13 @@
     </a>
     <ul class="right hide-on-med-and-down">
       <li>
-        <a *ngIf="isLoggedIn" routerLink="/my-polls">My polls</a>
+        <a *ngIf="isLoggedIn && isUserInRole('admin')" routerLink="/admin">Administration</a>
       </li>
       <li>
-        <a *ngIf="isLoggedIn" routerLink="/add-poll">Add poll</a>
+        <a *ngIf="isLoggedIn && !isUserInRole('admin')" routerLink="/my-polls">My Polls</a>
+      </li>
+      <li>
+        <a *ngIf="isLoggedIn" routerLink="/add-poll">Create poll</a>
       </li>
       <li>
         <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
@@ -34,18 +37,18 @@
       <li>
         <a *ngIf="!isLoggedIn" routerLink="/register">Register</a>
       </li>
-      <li>
-        <a *ngIf="isLoggedIn && isUserInRole('admin')" routerLink="/admin">Administration</a>
-      </li>
     </ul>
   </div>
 </nav>
 <ul id="nav-mobile" class="sidenav">
   <li>
-    <a *ngIf="isLoggedIn" routerLink="/my-polls">My polls</a>
+    <a *ngIf="isLoggedIn && isUserInRole('admin')" routerLink="/admin">Administration</a>
   </li>
   <li>
-    <a *ngIf="isLoggedIn" routerLink="/add-poll">Add poll</a>
+    <a *ngIf="isLoggedIn && !isUserInRole('admin')" routerLink="/my-polls">My Polls</a>
+  </li>
+  <li>
+    <a *ngIf="isLoggedIn" routerLink="/add-poll">Create</a>
   </li>
   <li>
     <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
