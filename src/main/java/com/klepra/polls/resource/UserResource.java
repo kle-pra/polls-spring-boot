@@ -5,10 +5,16 @@
  */
 package com.klepra.polls.resource;
 
+import com.klepra.polls.entity.User;
 import com.klepra.polls.services.UserService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -20,5 +26,15 @@ public class UserResource {
 
     @Autowired
     private UserService userService;
+    
+    @GetMapping
+    public List<User> getAllUsers(@RequestParam(defaultValue = "false") Boolean includeAdmins){
+        return userService.getAllUsers(includeAdmins);  
+    }
+
+    @DeleteMapping("/{id}")
+    public List<User> deleteUser(@PathVariable Long id){
+        return userService.deleteUserById(id);  
+    }
 
 }

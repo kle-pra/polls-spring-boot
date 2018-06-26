@@ -53,10 +53,12 @@ public class DummyDataCmdLineRunner implements CommandLineRunner {
 
         String password = bcryptEncoder.encode("password");
 
+        //insert normal test user
         User u1 = new User("user", password);
         u1.setRoles(Arrays.asList(userRole));
         userRepository.save(u1);
 
+        //insert admin test user
         User u2 = new User("admin", password);
         u2.setRoles(Arrays.asList(adminRole, userRole));
         userRepository.save(u2);

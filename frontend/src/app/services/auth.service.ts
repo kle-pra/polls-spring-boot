@@ -46,4 +46,14 @@ export class AuthService {
     // check if token is expired here!
     return localStorage.getItem('jwt') !== null && !this.jwtHelper.isTokenExpired(localStorage.getItem('jwt'));
   }
+
+  isUserAdmin() {
+    let roles: string[] = [];
+    if (localStorage.getItem('jwt')) {
+      roles = this.jwtHelper.decodeToken(localStorage.getItem('jwt')).roles;
+      return roles.includes('ROLE_ADMIN');
+    }
+    return false;
+
+  }
 }

@@ -11,6 +11,8 @@ import com.klepra.polls.entity.User;
 import com.klepra.polls.repository.RoleRepository;
 import com.klepra.polls.repository.UserRepository;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,11 +38,10 @@ public class UserService {
     public User saveUser(User user) {
 
         User existingUser = userRepository.findOneByUsername(user.getUsername());
-        
-        
-           Role userRole = new Role(RoleEnum.ROLE_USER.toString());
+
+        Role userRole = new Role(RoleEnum.ROLE_USER.toString());
         roleRepository.save(userRole);
-   
+
         String password = bcryptEncoder.encode(user.getPassword());
         user.setPassword(password);
         user.setRoles(Arrays.asList(userRole));
@@ -48,6 +49,22 @@ public class UserService {
             throw new IllegalArgumentException("Username already exists exception");
         }
         return userRepository.save(user);
+    }
+
+    public List<User> getAllUsers(boolean includeAdmins) {
+        if (includeAdmins) {
+            return userRepository.findAll();
+        } else {
+            return userRepository.findAll().stream()
+                .filter(
+                    u -> u.getRoles().stream()
+                        .noneMatch(role -> role.getRole().equals(RoleEnum.ROLE_ADMIN.name()))
+                ).collect(Collectors.toList());
+        }
+    }
+
+    public List<User> deleteUserById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

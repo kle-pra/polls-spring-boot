@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
 
   isLoggedIn: boolean;
   username: string;
+  roles: string[]
 
   ngOnInit() {
 
@@ -33,4 +34,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['welcome']);
   }
 
+  isUserInRole(role) {
+    if (role === 'admin') {
+      return this.authService.isUserAdmin();
+    }
+    return false;
+  }
 }

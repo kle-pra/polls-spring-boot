@@ -27,6 +27,7 @@
     "@auth0/angular-jwt": "2.0.0",
     "@swimlane/ngx-charts": "^8.0.2",
     "angular2-flash-messages": "^2.0.5",
+    "@swimlane/ngx-datatable": "^13.0.1",
     "core-js": "^2.5.7",
     "d3": "^5.4.0",
     "jquery": "^3.3.1",

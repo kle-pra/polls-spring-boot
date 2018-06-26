@@ -20,6 +20,9 @@ import { FormsModule } from '@angular/forms';
 import { PollSmallComponent } from './components/poll-small/poll-small.component';
 import { MyPollsComponent } from './components/my-polls/my-polls.component';
 import { AuthGuard } from './guards/auth.guard';
+import { UsersComponent } from './components/administration/users/users.component';
+import { AdminGuard } from './guards/admin.guard';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -34,6 +37,7 @@ import { AuthGuard } from './guards/auth.guard';
     FooterComponent,
     PollSmallComponent,
     MyPollsComponent,
+    UsersComponent,
 
   ],
   imports: [
@@ -43,12 +47,14 @@ import { AuthGuard } from './guards/auth.guard';
     HttpClientModule,
     AppRoutingModule,
     FlashMessagesModule.forRoot(),
-    FormsModule
+    FormsModule,
+    NgxDatatableModule
   ],
   providers: [
     AuthService,
     PollService,
-    AuthGuard],
+    AuthGuard,
+    AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

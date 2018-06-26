@@ -7,6 +7,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyPollsComponent } from './components/my-polls/my-polls.component';
 import { AuthGuard } from './guards/auth.guard';
+import { UsersComponent } from './components/administration/users/users.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -16,6 +18,7 @@ const routes: Routes = [
   { path: 'poll/:id', component: PollComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'admin', canActivate: [AdminGuard], component: UsersComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
