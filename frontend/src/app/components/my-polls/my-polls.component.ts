@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { PollService } from './../../services/poll.service';
@@ -11,7 +12,10 @@ import { Poll } from '../../models/poll.model';
 })
 export class MyPollsComponent implements OnInit {
 
-  constructor(private pollService: PollService, private flashMessagesService: FlashMessagesService, private router: Router) { }
+  constructor(private pollService: PollService,
+    private flashMessagesService: FlashMessagesService,
+    private router: Router,
+    private authService: AuthService) { }
 
   polls: Poll[] = [];
 
@@ -29,7 +33,8 @@ export class MyPollsComponent implements OnInit {
   }
 
   loadMyPolls() {
-    this.pollService.getPollsForUser().subscribe(polls => {
+    let username = this.authService.getLoggedInUser();
+    this.pollService.getPollsForUser(username).subscribe(polls => {
       this.polls = polls;
     }, error => {
       console.log(error);

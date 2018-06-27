@@ -38,12 +38,17 @@ public class PollResource {
         return pollService.getAll();
     }
 
-    @GetMapping("/user")
+    @GetMapping("/user/{username}")
     @Secured("ROLE_USER")
-    public List<Poll> getUserPolls(Principal p) {
-        return pollService.getAllForUser(p.getName());
+    public List<Poll> getUserPolls(@PathVariable String username, Principal p) {
+        
+        if (username.equals(p.getName())) {
+            return pollService.getAllForUser(username);
+        } else {
+            return pollService.getAllVisibleForUser(username);
+        }
     }
-    
+
     @GetMapping("/{id}")
     public Poll get(@PathVariable String id) {
         return pollService.getPollById(Long.parseLong(id));

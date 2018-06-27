@@ -6,6 +6,11 @@ Demo:
 
 https://polls-spring-boot.herokuapp.com/
 
+Test credentials:
+ 
+ - username: "user" or "admin"
+ - password: "password"
+
 Features:
 --
 

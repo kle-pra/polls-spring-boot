@@ -145,4 +145,8 @@ public class User implements UserDetails {
         this.disabled = disabled;
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", disabled=" + disabled + ", roles=" + roles + ", polls=" + polls + '}';
+    }
 }

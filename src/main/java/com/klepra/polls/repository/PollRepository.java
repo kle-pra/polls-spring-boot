@@ -18,4 +18,6 @@ public interface PollRepository extends JpaRepository<Poll, Long> {
 
     List<Poll> findAllByUser(User user);
 
+    public List<Poll> findAllByUserAndVisible(User user, boolean b);
+
 }

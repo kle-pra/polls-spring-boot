@@ -39,7 +39,7 @@ public class PollService {
 
     @Transactional
     public Poll savePoll(Poll poll, String username) {
-        
+
         User user = userRepository.findOneByUsername(username);
 
         poll.setUser(user);
@@ -107,6 +107,12 @@ public class PollService {
     public List<Poll> getAllForUser(String username) {
         User user = userRepository.findOneByUsername(username);
         return pollRepository.findAllByUser(user);
+    }
+
+    public List<Poll> getAllVisibleForUser(String username) {
+        User user = userRepository.findOneByUsername(username);
+
+        return pollRepository.findAllByUserAndVisible(user, true);
     }
 
 }

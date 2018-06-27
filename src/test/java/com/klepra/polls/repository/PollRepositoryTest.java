@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.klepra.polls.resource;
+package com.klepra.polls.repository;
 
 import com.klepra.polls.entity.Poll;
 import com.klepra.polls.entity.User;
-import com.klepra.polls.repository.PollRepository;
-import com.klepra.polls.repository.UserRepository;
-import java.text.ParseException;
 import java.util.List;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import org.junit.Test;
@@ -18,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -27,7 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest()
-public class PollResourceTest {
+public class PollRepositoryTest {
 
     @Autowired
     private TestEntityManager em;
@@ -35,14 +31,11 @@ public class PollResourceTest {
     @Autowired
     private PollRepository pollRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    public PollResourceTest() {
+    public PollRepositoryTest() {
     }
 
     @Test
-    public void findAllByUsernameSuccess() {
+    public void testFindAllByUsernameSuccess() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
         //given
         User user1 = em.persist(new User("TestUser1", bCryptPasswordEncoder.encode("12345")));

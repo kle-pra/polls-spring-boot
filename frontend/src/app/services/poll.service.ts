@@ -15,17 +15,17 @@ export class PollService {
         'Authorization': localStorage.getItem('jwt') !== null ? 'Bearer ' + localStorage.getItem('jwt') : ''
       })
     };
-    return this.http.get('api/polls');
+    return this.http.get('api/polls', httpOptions);
   }
 
-  getPollsForUser(): Observable<any> {
+  getPollsForUser(username): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('jwt') !== null ? 'Bearer ' + localStorage.getItem('jwt') : ''
       })
     };
-    return this.http.get('api/polls/user', httpOptions);
+    return this.http.get('api/polls/user/' + username, httpOptions);
   }
 
   getPoll(id): Observable<any> {
