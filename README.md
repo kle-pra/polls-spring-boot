@@ -33,4 +33,4 @@ To run, build backend & frontend; frontend files are copied to over to static fo
 - mvn package
 - java -jar target/polls-0.0.1-SNAPSHOT.jar
 
-There is a similar project where I used NodeJs here: https://github.com/kle-pra/polls-node 
+There is a similar project where I used NodeJs: https://github.com/kle-pra/polls-node 
